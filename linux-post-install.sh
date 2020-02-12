@@ -15,7 +15,8 @@ show_menu(){
     echo -e "${MENU}**${NUMBER} 3)${MENU} Install Docker ${NORMAL}"
     echo -e "${MENU}**${NUMBER} 4)${MENU} Install Submlime Text ${NORMAL}"
     echo -e "${MENU}**${NUMBER} 5)${MENU} Install Gitkraken ${NORMAL}"
-    echo -e "${MENU}**${NUMBER} 6)${MENU} Install All ${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 6)${MENU} Install .NET Core ${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 7)${MENU} Install All ${NORMAL}"
     echo -e "${MENU}*********************************************${NORMAL}"
     echo -e "${ENTER_LINE}Please enter a menu option and enter or ${RED_TEXT}enter to exit. ${NORMAL}"
     read opt
@@ -43,6 +44,7 @@ function code_install() {
   sudo apt-get install apt-transport-https
   sudo apt-get update
   sudo apt-get -y install code
+  sudo rm -f packages.microsoft.gpg*
 }
 
 function docker_install() {
@@ -66,6 +68,20 @@ function gitkraken_install() {
   wget https://release.gitkraken.com/linux/gitkraken-amd64.deb
   sudo dpkg -i gitkraken-amd64.deb
   sudo rm -f gitkraken-amd64.deb*
+}
+
+function dotnetcore_install() {
+  wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
+  sudo mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
+  wget -q https://packages.microsoft.com/config/debian/10/prod.list
+  sudo mv prod.list /etc/apt/sources.list.d/microsoft-prod.list
+  sudo chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
+  sudo chown root:root /etc/apt/sources.list.d/microsoft-prod.list
+  sudo apt-get update
+  sudo apt-get -y install apt-transport-https
+  sudo apt-get update
+  sudo apt-get -y install dotnet-sdk-3.1 aspnetcore-runtime-3.1 dotnet-runtime-3.1
+  sudo rm -f packages.microsoft.gpg*
 }
 
 function embedded_install() {
@@ -116,7 +132,13 @@ while [ opt != '' ]
 		option_picked "Operation Done!";
 		exit;
 		;;
-	6) clear;
+  6) clear;
+		option_picked "Installing .NET Core";
+		dotnetcore_install;
+		option_picked "Operation Done!";
+		exit;
+		;;
+	7) clear;
 		option_picked "Installing All";
 		atom_install;
     		code_install;
