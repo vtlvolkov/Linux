@@ -15,8 +15,10 @@ show_menu(){
     echo -e "${MENU}**${NUMBER} 3)${MENU} Install Docker ${NORMAL}"
     echo -e "${MENU}**${NUMBER} 4)${MENU} Install Submlime Text ${NORMAL}"
     echo -e "${MENU}**${NUMBER} 5)${MENU} Install Gitkraken ${NORMAL}"
-    echo -e "${MENU}**${NUMBER} 6)${MENU} Install .NET Core ${NORMAL}"
-    echo -e "${MENU}**${NUMBER} 7)${MENU} Install All ${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 6)${MENU} Install Google Chrome ${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 7)${MENU} Install Skype ${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 8)${MENU} Install .NET Core ${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 9)${MENU} Install All ${NORMAL}"
     echo -e "${MENU}*********************************************${NORMAL}"
     echo -e "${ENTER_LINE}Please enter a menu option and enter or ${RED_TEXT}enter to exit. ${NORMAL}"
     read opt
@@ -70,6 +72,22 @@ function gitkraken_install() {
   sudo rm -f gitkraken-amd64.deb*
 }
 
+function chrome_install() {
+  wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
+  sudo apt-get -y install ./google-chrome-stable_current_amd64.deb
+  sudo rm -f google-chrome-stable_current_amd64.deb
+}
+
+function skype_install() {
+  sudo dpkg --add-architecture i386
+  sudo apt-get update
+  wget -O skype-install.deb http://www.skype.com/go/getskype-linux-deb
+  sudo apt-get -f install
+  sudo dpkg -i skype-install.deb
+  sudo rm -f skype-install.deb*
+}
+
 function dotnetcore_install() {
   wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
   sudo mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
@@ -83,11 +101,6 @@ function dotnetcore_install() {
   sudo apt-get -y install dotnet-sdk-3.1 aspnetcore-runtime-3.1 dotnet-runtime-3.1
   sudo rm -f packages.microsoft.gpg*
 }
-
-function embedded_install() {
-	apt-get -y --force-yes -o Dpkg::Options::="--force-overwrite" install parrot-interface parrot-mini
-}
-
 
 
 function init_function() {
@@ -133,12 +146,24 @@ while [ opt != '' ]
 		exit;
 		;;
   6) clear;
+  	option_picked "Installing Google Chrome";
+  	chrome_install;
+  	option_picked "Operation Done!";
+  	exit;
+  	;;
+  7) clear;
+  	option_picked "Installing Skype";
+  	skype_install;
+  	option_picked "Operation Done!";
+  	exit;
+  	;;
+  8) clear;
 		option_picked "Installing .NET Core";
 		dotnetcore_install;
 		option_picked "Operation Done!";
 		exit;
 		;;
-	7) clear;
+	9) clear;
 		option_picked "Installing All";
 		atom_install;
     		code_install;
