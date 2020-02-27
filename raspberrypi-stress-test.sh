@@ -1,10 +1,8 @@
 #/!bin/bash
 
 function get_cpu_info() {
-        vcgencmd measure_temp
-        vcgencmd measure_clock arm
-        vcgencmd get_throttled
-        echo
+        cpu=$(</sys/class/thermal/thermal_zone0/temp)
+	echo "$((cpu/1000)) c"
 }
 
 get_cpu_info
