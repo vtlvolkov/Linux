@@ -18,7 +18,9 @@ show_menu(){
     echo -e "${MENU}**${NUMBER} 6)${MENU} Install Google Chrome ${NORMAL}"
     echo -e "${MENU}**${NUMBER} 7)${MENU} Install Skype ${NORMAL}"
     echo -e "${MENU}**${NUMBER} 8)${MENU} Install .NET Core ${NORMAL}"
-    echo -e "${MENU}**${NUMBER} 9)${MENU} Install All ${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 9)${MENU} Install Metasploit Framework ${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 10)${MENU} Install Aircrack-NG ${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 11)${MENU} Install All ${NORMAL}"
     echo -e "${MENU}*********************************************${NORMAL}"
     echo -e "${ENTER_LINE}Please enter a menu option and enter or ${RED_TEXT}enter to exit. ${NORMAL}"
     read opt
@@ -54,7 +56,7 @@ function docker_install() {
   sudo apt-get update
   sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common
   curl -L https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-  sudo sh -c 'echo "deb [arch=amd64] https://download.docker.com/linux/debian/ buster stable" > /etc/apt/sources.list.d/docker.list'
+  sudo sh -c 'echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu/ eoan stable" > /etc/apt/sources.list.d/docker.list'
   sudo apt-get update
   sudo apt-get -y install docker-ce docker-ce-cli containerd.io
 }
@@ -101,6 +103,20 @@ function dotnetcore_install() {
   sudo apt-get -y install dotnet-sdk-3.1 aspnetcore-runtime-3.1 dotnet-runtime-3.1
   sudo rm -f packages.microsoft.gpg*
 }
+
+function msfconsole_install() {
+  curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && \
+  chmod 755 msfinstall && \
+  ./msfinstall
+  sudo rm -f msfinstall
+}
+
+function aircrackng_install() {
+sudo apt-get -y install build-essential autoconf automake libtool pkg-config libnl-3-dev libnl-genl-3-dev libssl-dev ethtool shtool rfkill zlib1g-dev libpcap-dev libsqlite3-dev libpcre3-dev libhwloc-dev libcmocka-dev hostapd wpasupplicant tcpdump screen iw usbutils
+sudo apt-get -y install aircrack-ng
+}
+
+
 
 
 function init_function() {
@@ -163,13 +179,30 @@ while [ opt != '' ]
 		option_picked "Operation Done!";
 		exit;
 		;;
-	9) clear;
+  9) clear;
+		option_picked "Installing Metasploit Console";
+		msfconsole_install;
+		option_picked "Operation Done!";
+		exit;
+		;;
+  10) clear;
+		option_picked "Installing Airckrack-NG";
+		aircrackng_install;
+		option_picked "Operation Done!";
+		exit;
+		;;
+	11) clear;
 		option_picked "Installing All";
-		atom_install;
+		    atom_install;
     		code_install;
         docker_install;
         sublimetext_install;
         gitkraken_install;
+        chrome_install;
+        skype_install;
+        dotnetcore_install;
+        msfconsole_install;
+        aircrackng_install;
 		option_picked "Operation Done!";
 		exit;
 	    ;;
