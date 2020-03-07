@@ -118,7 +118,7 @@ function aircrackng_install() {
 }
 
 function misc_install() {
-  sudo apt-get -y install nmap hashcat
+  sudo apt-get -y install nmap hashcat tshark reaver pyrit gqrx-sdr xterm sslstrip john ettercap-graphical mdk4 lighttpd dhcpd dsniff crunch php hydra cutycapt
 }
 
 
