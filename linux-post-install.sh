@@ -20,7 +20,8 @@ show_menu(){
     echo -e "${MENU}**${NUMBER} 8)${MENU} Install .NET Core ${NORMAL}"
     echo -e "${MENU}**${NUMBER} 9)${MENU} Install Metasploit Framework ${NORMAL}"
     echo -e "${MENU}**${NUMBER} 10)${MENU} Install Aircrack-NG ${NORMAL}"
-    echo -e "${MENU}**${NUMBER} 11)${MENU} Install All ${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 11)${MENU} Install Misc Apps ${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 12)${MENU} Install All ${NORMAL}"
     echo -e "${MENU}*********************************************${NORMAL}"
     echo -e "${ENTER_LINE}Please enter a menu option and enter or ${RED_TEXT}enter to exit. ${NORMAL}"
     read opt
@@ -112,11 +113,13 @@ function msfconsole_install() {
 }
 
 function aircrackng_install() {
-sudo apt-get -y install build-essential autoconf automake libtool pkg-config libnl-3-dev libnl-genl-3-dev libssl-dev ethtool shtool rfkill zlib1g-dev libpcap-dev libsqlite3-dev libpcre3-dev libhwloc-dev libcmocka-dev hostapd wpasupplicant tcpdump screen iw usbutils
-sudo apt-get -y install aircrack-ng
+  sudo apt-get -y install build-essential autoconf automake libtool pkg-config libnl-3-dev libnl-genl-3-dev libssl-dev ethtool shtool rfkill zlib1g-dev libpcap-dev libsqlite3-dev libpcre3-dev libhwloc-dev libcmocka-dev hostapd wpasupplicant tcpdump screen iw usbutils
+  sudo apt-get -y install aircrack-ng
 }
 
-
+function misc_install() {
+  sudo apt-get -y install nmap hashcat
+}
 
 
 function init_function() {
@@ -191,7 +194,13 @@ while [ opt != '' ]
 		option_picked "Operation Done!";
 		exit;
 		;;
-	11) clear;
+  11) clear;
+		option_picked "Installing Misc Apps";
+		misc_install;
+		option_picked "Operation Done!";
+		exit;
+		;;
+	12) clear;
 		option_picked "Installing All";
 		    atom_install;
     		code_install;
@@ -203,6 +212,7 @@ while [ opt != '' ]
         dotnetcore_install;
         msfconsole_install;
         aircrackng_install;
+        misc_install;
 		option_picked "Operation Done!";
 		exit;
 	    ;;
