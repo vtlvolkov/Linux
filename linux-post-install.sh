@@ -103,6 +103,12 @@ function dotnetcore_install() {
   sudo apt-get update
   sudo apt-get -y install dotnet-sdk-3.1 aspnetcore-runtime-3.1 dotnet-runtime-3.1
   sudo rm -f packages.microsoft.gpg*
+
+  sudo apt -y install gnupg ca-certificates
+  sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+  echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+  sudo apt update
+  sudo apt -y install mono-devel
 }
 
 function msfconsole_install() {
@@ -118,7 +124,7 @@ function aircrackng_install() {
 }
 
 function misc_install() {
-  sudo apt-get -y install nmap hashcat tshark reaver pyrit gqrx-sdr xterm sslstrip john ettercap-graphical mdk4 lighttpd dhcpd dsniff crunch php hydra cutycapt
+  sudo apt-get -y install nmap hashcat tshark reaver pyrit gqrx-sdr xterm sslstrip john ettercap-graphical mdk4 lighttpd dhcpd dsniff crunch php hydra cutycapt python3-pip python3-distutils
 }
 
 
