@@ -124,7 +124,7 @@ function aircrackng_install() {
 }
 
 function misc_install() {
-  sudo apt-get -y install nmap hashcat tshark reaver pyrit gqrx-sdr xterm sslstrip john ettercap-graphical mdk4 lighttpd dhcpd dsniff crunch php hydra cutycapt python3-pip python3-distutils
+  sudo apt-get -y install openconnect network-manager-openconnect network-manager-openconnect-gnome nmap hashcat tshark reaver pyrit gqrx-sdr xterm sslstrip john ettercap-graphical mdk4 lighttpd dhcpd dsniff crunch php hydra cutycapt python3-pip python3-distutils
 }
 
 
