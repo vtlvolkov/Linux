@@ -8,8 +8,8 @@ show_menu(){
     RED_TEXT=`echo "\033[31m"`
     ENTER_LINE=`echo "\033[33m"`
     echo -e "${MENU}*********************************************${NORMAL}"
-    echo -e "Welcome to Parrot Post Installer Script"
-    echo -e "\t\trev 0.2 - 2015-06-10"
+    echo -e "Welcome to Ubuntu Post Installer Script"
+    echo -e "\t\trev 2.0 - 2020-04-22"
     echo -e "${MENU}**${NUMBER} 1)${MENU} Install Atom ${NORMAL}"
     echo -e "${MENU}**${NUMBER} 2)${MENU} Install VS Code ${NORMAL}"
     echo -e "${MENU}**${NUMBER} 3)${MENU} Install Docker ${NORMAL}"
