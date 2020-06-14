@@ -1,2 +1,3 @@
 #!/bin/sh
-opkg list-upgradable | cut -f 1 -d ' ' | xargs opkg upgrade
+opkg update
+opkg list-upgradable | cut -f 1 -d ' ' | xargs --no-run-if-empty opkg upgrade
