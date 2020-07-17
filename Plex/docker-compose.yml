@@ -1,0 +1,15 @@
+version: '2'
+services:
+  plex:
+    container_name: plex
+    image: linuxserver/plex
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Kiev
+      - PLEX_CLAIM=
+    network_mode: host
+    volumes:
+      - /media/Plex/config:/config
+      - /media/Plex/transcode:/transcode
+      - /media/Plex/data:/data
+
